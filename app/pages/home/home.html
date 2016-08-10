@@ -1,0 +1,65 @@
+<ion-header >
+  <ion-navbar primary class="hide-border">
+    <ion-segment [(ngModel)]="segment" (ionChange)="updateSchedule()">
+    <ion-segment-button value="all">
+      All
+    </ion-segment-button>
+    <ion-segment-button value="favorites">
+      Favorites
+    </ion-segment-button>
+  </ion-segment>
+    <ion-title>Home</ion-title>
+    <ion-buttons end>
+      <button (click)="logout()">
+        <ion-icon name="log-out" light></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar>
+  <ion-searchbar primary
+                 [(ngModel)]="queryText"
+                 (ionInput)="updateSchedule()"
+                 placeholder="Search">
+  </ion-searchbar>
+</ion-toolbar>
+</ion-header>
+
+
+
+<ion-content padding class="home">
+
+  <ion-card *ngFor="let post of posts | async">
+    <ion-item>
+      <ion-avatar item-left>
+        <img src="https://avatars.io/facebook/random">
+      </ion-avatar>
+      <h2>{{post.user_name}}</h2>
+      <p>{{post.created_on | date:'medium'}}</p>
+    </ion-item>
+    <ion-card-content>
+      <p>{{post.text}}</p>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+        <button primary clear small>
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>12 Likes</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button primary clear small>
+          <ion-icon name="text"></ion-icon>
+          <div>4 Comments</div>
+        </button>
+      </ion-col>
+      <ion-col center text-center>
+        <ion-note>
+          11h ago
+        </ion-note>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+    
+</ion-content>
